@@ -1,0 +1,54 @@
+
+<mat-card>
+    <h2>User Data</h2>
+
+    <mat-form-field class="example-form-field">
+        <mat-label>Search User here!</mat-label>
+        <input matInput
+               type="text"
+               [(ngModel)]="term"
+               class="searchTerm"
+               placeholder="Search User here!" />
+
+        <button *ngIf="term" matSuffix mat-icon-button aria-label="Clear" (click)="term=''">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+
+
+    <div class="mh-500px w-100 overflow-auto d-inline-block mt-5 shadow">
+        <table class="table table-striped" matSort (matSortChange)="sortData($event)">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th mat-sort-header="firstName" scope="col">First Name</th>
+                    <th mat-sort-header="lastName" scope="col">Last Name</th>
+                    <th mat-sort-header="dateOfBirth" scope="col">Date Of Birth</th>
+                    <th mat-sort-header="emailAddress" scope="col">Email Address</th>
+                    <th mat-sort-header="address" scope="col">Address</th>
+                    <th mat-sort-header="city" scope="col">City</th>
+                    <th mat-sort-header="country" scope="col">Country</th>
+                    <th mat-sort-header="zipCode" scope="col">Zip Code</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of sortedData | filter: term; index as i">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{ item.firstName }}</td>
+                    <td>{{ item.lastName }}</td>
+                    <td>{{ item.dateOfBirth }}</td>
+                    <td>{{ item.emailAddress }}</td>
+                    <td>{{ item.address }}</td>
+                    <td>{{ item.city }}</td>
+                    <td>{{ item.country }}</td>
+                    <td>{{ item.zipCode }}</td>
+                    <td>
+                        <button mat-icon-button aria-label="Example icon button with a open in new tab icon" (click)="onClickBtnUpdateUser(item)">
+                            <mat-icon>open_in_new</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</mat-card>
